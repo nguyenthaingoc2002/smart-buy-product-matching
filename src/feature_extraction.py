@@ -54,7 +54,7 @@ def extract_image_to_vector(image_urls, model):
   for index in range(len(image_urls)):
     image = Image.open("data/images/{index_image}.png".format(index_image = index))
     image = image.convert("RGB")
-    image = image.resize((224, 224))
+    image = image.resize((256, 256))
     image = np.asarray(image)
     image = preprocess_input(np.expand_dims(image.copy(), axis=0))
 
@@ -65,7 +65,7 @@ def extract_image_to_vector(image_urls, model):
   return image_embeddings
 
 def feature_extraction_image_product(image_urls):
-#   download_image(image_urls)
+  download_image(image_urls)
   resnet = ResNet50(include_top=False, pooling='avg', weights='imagenet')
   model = Sequential()
   model.add(resnet)
